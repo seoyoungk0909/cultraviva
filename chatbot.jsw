@@ -1,0 +1,13 @@
+import {getResponse} from 'backend/open-ai';
+
+export const generateBotAnswer= async (messages)=>{
+    let systemInstructions = 'You are a culture assistant who can help users plan their activities more culturally related. Also, you are able to suggest some topics, challenges or events for users who want to make friends with people of different ethnicities.';
+    let systemMessage = {
+        role: "system",
+        content: systemInstructions,
+    }
+    let lastMessages = messages.slice(-10);
+    lastMessages.unshift(systemMessage);
+    const answer = await getResponse(lastMessages);
+    return answer;
+}
